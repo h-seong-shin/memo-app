@@ -24,14 +24,14 @@ export default function Home() {
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [editingMemo, setEditingMemo] = useState<Memo | null>(null)
 
-  const handleCreateMemo = (formData: MemoFormData) => {
-    createMemo(formData)
+  const handleCreateMemo = async (formData: MemoFormData) => {
+    await createMemo(formData)
     setIsFormOpen(false)
   }
 
-  const handleUpdateMemo = (formData: MemoFormData) => {
+  const handleUpdateMemo = async (formData: MemoFormData) => {
     if (editingMemo) {
-      updateMemo(editingMemo.id, formData)
+      await updateMemo(editingMemo.id, formData)
       setEditingMemo(null)
     }
   }
@@ -46,9 +46,9 @@ export default function Home() {
     setEditingMemo(null)
   }
 
-  const handleResetData = () => {
+  const handleResetData = async () => {
     if (confirm('모든 데이터를 샘플 데이터로 리셋하시겠습니까? 기존 메모는 모두 삭제됩니다.')) {
-      resetToSampleData()
+      await resetToSampleData()
       window.location.reload()
     }
   }

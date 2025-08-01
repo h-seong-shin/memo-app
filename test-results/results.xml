@@ -1,0 +1,14 @@
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="31.839842000000004">
+<testsuite name="memo-creation.spec.ts" timestamp="2025-08-01T06:18:20.273Z" hostname="chromium" tests="1" failures="0" skipped="0" time="5.702" errors="0">
+<testcase name="새 메모 작성" classname="memo-creation.spec.ts" time="5.702">
+</testcase>
+</testsuite>
+<testsuite name="memo-creation.spec.ts" timestamp="2025-08-01T06:18:20.273Z" hostname="firefox" tests="1" failures="0" skipped="0" time="10.513" errors="0">
+<testcase name="새 메모 작성" classname="memo-creation.spec.ts" time="10.513">
+</testcase>
+</testsuite>
+<testsuite name="memo-creation.spec.ts" timestamp="2025-08-01T06:18:20.273Z" hostname="webkit" tests="1" failures="0" skipped="0" time="16.306" errors="0">
+<testcase name="새 메모 작성" classname="memo-creation.spec.ts" time="16.306">
+</testcase>
+</testsuite>
+</testsuites>

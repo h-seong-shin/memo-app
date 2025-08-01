@@ -2,7 +2,7 @@
 
 **핸즈온 실습용 Next.js 메모 애플리케이션**
 
-LocalStorage 기반의 완전한 CRUD 기능을 갖춘 메모 앱으로, MCP 연동 및 GitHub PR 생성 실습의 기반이 되는 프로젝트입니다.
+Supabase 데이터베이스 기반의 완전한 CRUD 기능을 갖춘 메모 앱으로, MCP 연동 및 GitHub PR 생성 실습의 기반이 되는 프로젝트입니다.
 
 ## 🚀 주요 기능
 
@@ -11,7 +11,7 @@ LocalStorage 기반의 완전한 CRUD 기능을 갖춘 메모 앱으로, MCP 연
 - 🏷️ 태그 시스템으로 메모 태깅
 - 🔍 제목, 내용, 태그 기반 실시간 검색
 - 📱 반응형 디자인 (모바일, 태블릿, 데스크톱)
-- 💾 LocalStorage 기반 데이터 저장 (오프라인 지원)
+- 💾 Supabase 데이터베이스 기반 데이터 저장 (실시간 동기화)
 - 🎨 모던한 UI/UX with Tailwind CSS
 
 ## 🛠 기술 스택
@@ -19,7 +19,8 @@ LocalStorage 기반의 완전한 CRUD 기능을 갖춘 메모 앱으로, MCP 연
 - **Framework**: Next.js 15.4.4 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4
-- **Storage**: LocalStorage
+- **Database**: Supabase PostgreSQL
+- **Client**: @supabase/supabase-js & @supabase/ssr
 - **State Management**: React Hooks (useState, useEffect, useMemo)
 - **Package Manager**: npm
 
@@ -31,13 +32,31 @@ LocalStorage 기반의 완전한 CRUD 기능을 갖춘 메모 앱으로, MCP 연
 npm install
 ```
 
-### 2. 개발 서버 실행
+### 2. Supabase 프로젝트 설정
+
+1. [Supabase Dashboard](https://supabase.com/dashboard)에서 새 프로젝트 생성
+2. SQL Editor에서 `supabase/migrations/001_create_memos_table.sql` 실행
+3. Settings > API에서 다음 값들 확인:
+   - Project URL
+   - Project API keys > `anon` key
+
+### 3. 환경변수 설정
+
+`.env.local` 파일을 생성하고 Supabase 정보를 입력:
+
+```bash
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### 4. 개발 서버 실행
 
 ```bash
 npm run dev
 ```
 
-### 3. 브라우저 접속
+### 5. 브라우저 접속
 
 ```
 http://localhost:3000
@@ -61,7 +80,10 @@ memo-app/
 │   ├── types/
 │   │   └── memo.ts              # 메모 타입 정의
 │   └── utils/
-│       ├── localStorage.ts      # LocalStorage 유틸리티
+│       ├── supabase/
+│       │   ├── client.ts        # Supabase 브라우저 클라이언트
+│       │   └── server.ts        # Supabase 서버 클라이언트
+│       ├── supabaseUtils.ts     # Supabase CRUD 유틸리티
 │       └── seedData.ts          # 샘플 데이터 시딩
 └── README.md                    # 프로젝트 문서
 ```
@@ -156,19 +178,19 @@ const {
 } = useMemos()
 ```
 
-### LocalStorage 직접 조작
+### Supabase 직접 조작
 
 ```typescript
-import { localStorageUtils } from '@/utils/localStorage'
+import { supabaseUtils } from '@/utils/supabaseUtils'
 
 // 모든 메모 가져오기
-const memos = localStorageUtils.getMemos()
+const memos = await supabaseUtils.getMemos()
 
 // 메모 추가
-localStorageUtils.addMemo(newMemo)
+const savedMemo = await supabaseUtils.addMemo(newMemo)
 
 // 메모 검색
-const results = localStorageUtils.searchMemos('React')
+const results = await supabaseUtils.searchMemos('React')
 ```
 
 ## 🚀 배포
