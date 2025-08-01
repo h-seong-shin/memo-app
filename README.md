@@ -129,6 +129,28 @@ interface Memo {
 
 이 프로젝트는 다음 3가지 실습의 기반으로 사용됩니다:
 
+## 🧪 E2E 테스트
+
+Playwright를 사용한 End-to-End 테스트가 구현되어 있습니다:
+
+### 테스트 실행
+```bash
+# 모든 테스트 실행
+npm run test:e2e
+
+# 특정 테스트 실행
+npx playwright test tests/memo-creation.spec.ts
+```
+
+### 구현된 테스트 시나리오
+- ✅ 새 메모 작성 테스트
+- 📋 메모 검색 테스트 (예정)
+- 📂 카테고리 필터링 테스트 (예정)
+- ✏️ 메모 수정 테스트 (예정)
+- 🗑️ 메모 삭제 테스트 (예정)
+
+자세한 테스트 시나리오는 `memo-app-e2e-test-scenarios.md`를 참고하세요.
+
 ### 실습 1: Supabase MCP 마이그레이션 (45분)
 
 - LocalStorage → Supabase 데이터베이스 전환
