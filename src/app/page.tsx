@@ -5,6 +5,7 @@ import { useMemos } from '@/hooks/useMemos'
 import { Memo, MemoFormData } from '@/types/memo'
 import MemoList from '@/components/MemoList'
 import MemoForm from '@/components/MemoForm'
+import { resetToSampleData } from '@/utils/seedData'
 
 export default function Home() {
   const {
@@ -45,6 +46,13 @@ export default function Home() {
     setEditingMemo(null)
   }
 
+  const handleResetData = () => {
+    if (confirm('모든 데이터를 샘플 데이터로 리셋하시겠습니까? 기존 메모는 모두 삭제됩니다.')) {
+      resetToSampleData()
+      window.location.reload()
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* 헤더 */}
@@ -58,6 +66,13 @@ export default function Home() {
             </div>
 
             <div className="flex items-center space-x-4">
+              <button
+                onClick={handleResetData}
+                className="inline-flex items-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors"
+                title="샘플 데이터로 리셋 (마크다운 예제 포함)"
+              >
+                🔄 리셋
+              </button>
               <button
                 onClick={() => setIsFormOpen(true)}
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"

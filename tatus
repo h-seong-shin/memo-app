@@ -1,0 +1,40 @@
+[1mdiff --git a/src/app/page.tsx b/src/app/page.tsx[m
+[1mindex ef1a7d8..f872063 100644[m
+[1m--- a/src/app/page.tsx[m
+[1m+++ b/src/app/page.tsx[m
+[36m@@ -5,6 +5,7 @@[m [mimport { useMemos } from '@/hooks/useMemos'[m
+ import { Memo, MemoFormData } from '@/types/memo'[m
+ import MemoList from '@/components/MemoList'[m
+ import MemoForm from '@/components/MemoForm'[m
+[32m+[m[32mimport { resetToSampleData } from '@/utils/seedData'[m
+ [m
+ export default function Home() {[m
+   const {[m
+[36m@@ -45,6 +46,13 @@[m [mexport default function Home() {[m
+     setEditingMemo(null)[m
+   }[m
+ [m
+[32m+[m[32m  const handleResetData = () => {[m
+[32m+[m[32m    if (confirm('모든 데이터를 샘플 데이터로 리셋하시겠습니까? 기존 메모는 모두 삭제됩니다.')) {[m
+[32m+[m[32m      resetToSampleData()[m
+[32m+[m[32m      window.location.reload()[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+   return ([m
+     <div className="min-h-screen bg-gray-50">[m
+       {/* 헤더 */}[m
+[36m@@ -58,6 +66,13 @@[m [mexport default function Home() {[m
+             </div>[m
+ [m
+             <div className="flex items-center space-x-4">[m
+[32m+[m[32m              <button[m
+[32m+[m[32m                onClick={handleResetData}[m
+[32m+[m[32m                className="inline-flex items-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors"[m
+[32m+[m[32m                title="샘플 데이터로 리셋 (마크다운 예제 포함)"[m
+[32m+[m[32m              >[m
+[32m+[m[32m                🔄 리셋[m
+[32m+[m[32m              </button>[m
+               <button[m
+                 onClick={() => setIsFormOpen(true)}[m
+                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"[m
